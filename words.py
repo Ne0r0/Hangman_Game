@@ -1,8 +1,14 @@
-python_terms = [
-    "tuple", "class", "float", "input", "print", "while", "break", "async", "await",
-    "super", "global", "lambda", "import", "return", "object", "method", "string",
-    "format", "append", "remove", "insert", "extend", "sorted", "filter", "reduce",
-    "random", "choice", "logging", "except", "finally", "raise", "decode", "encode",
-    "module", "syntax", "indent", "kwargs", "args", "yield", "define", "update",
-    "values", "items", "length", "output", "errors", "binary", "branch", "commit"
+python_words = [
+    "TUPLE", "CLASS", "FLOAT", "INPUT", "PRINT", "WHILE", "BREAK", "ASYNC", "AWAIT", "SUPER",
+    "GLOBAL", "LAMBDA", "IMPORT", "RETURN", "OBJECT", "METHOD", "STRING", "FORMAT", "APPEND", "REMOVE",
+    "INSERT", "EXTEND", "SORTED", "FILTER", "REDUCE", "RANDOM", "CHOICE", "LOGGING", "EXCEPT", "FINALLY",
+    "RAISE", "DECODE", "ENCODE", "MODULE", "SYNTAX", "INDENT", "KWARGS", "ARGS", "YIELD", "DEFINE",
+    "UPDATE", "VALUES", "ITEMS", "LENGTH", "OUTPUT", "ERRORS", "BINARY", "BRANCH", "COMMIT", "BOOLEAN"
 ]
+
+extra_words = [
+    "DECORATOR", "GENERATOR", "CONTEXT", "EXCEPTION", "INSTANCE",
+    "ENCAPSULATE", "POLYMORPHISM", "ITERATOR", "DATACLASS", "FSTRING"
+]
+
+python_words += extra_words
