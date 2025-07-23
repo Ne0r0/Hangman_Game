@@ -2,9 +2,9 @@ import random
 
 # Paleidžia žaidimą: pasirenka žodį, nustato gyvybes, išvalo spėjimus.
 class HangmanGame:
-    def __init__(self, word_list, lives=5): # DEBUG lives=5. Default for game lives=10
+    def __init__(self, word_list, lives=5):  # DEBUG lives=5. Default for game lives=10
         self.word = random.choice(word_list).upper()
-        self.guessed_letters = set() # spėjimų istorija pradedama nuo nulio
+        self.guessed_letters = set()  # Spėjimų istorija pradedama nuo nulio
         self.lives = lives
 
 # Tikrina, ar žaidėjas atspėjo visas raides — tuomet žaidimas laimėtas.
