@@ -11,3 +11,7 @@ def display_result(win: bool) -> None:
     else:
         print("☠️ Game Over ☠️")
         print(random.choice(lose_faces))
+
+def play_again() -> bool:
+    print("Do you want to play again? (yes or no)")
+    return input().lower().startswith("y")

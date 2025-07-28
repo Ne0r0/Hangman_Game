@@ -9,19 +9,23 @@ class HangmanGame:
 
 # Tikrina, ar žaidėjas atspėjo visas raides — tuomet žaidimas laimėtas.
     @property
-    def is_game_won(self):
-        return all(letter in self.guessed_letters for letter in self.word)
+    def is_game_won(self) -> bool:
+        for letter in self.word:
+            if letter.upper() not in self.guessed_letters:
+                return False
+        return True
 
 # Tikrina, ar gyvybės pasibaigusios — žaidimas pralaimėtas.
     @property
     def is_game_over(self):
         return self.lives <= 0
 
-# Atlieka spėjimą viena raide. Patikrina, ar raidė teisinga, jei ne — atima gyvybę.
+# Apdoroja raidės spėjimą: įtraukia į spėtas ir sumažina gyvybę, jei raidė neteisinga.
     def guess_letter(self, letter: str):
         letter = letter.upper()
         self.guessed_letters.add(letter)
         if letter not in self.word:
+            print("❌ Wrong letter!")
             self.lives -= 1
 
 # Leidžia spėti visą žodį. Jei atspėtas — laimima, jei ne — gyvybės bauda.
@@ -30,8 +34,17 @@ class HangmanGame:
         if guess == self.word:
             self.guessed_letters.update(self.word)
         else:
-            self.lives -= 1
+            print("❌ Wrong word! You lose half your lives.")
+            self.lives = max(0, self.lives // 2)
 
 # Grąžina žodį su atskleistomis raidėmis ir _, pvz. _ A _ _ E _.
     def display_word_progress(self) -> str:
-        return ' '.join([letter if letter in self.guessed_letters else '_' for letter in self.word])
+        progress = []
+
+        for letter in self.word:
+            if letter.upper() in self.guessed_letters:
+                progress.append(letter)
+            else:
+                progress.append('_')
+
+        return ' '.join(progress)
