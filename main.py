@@ -12,7 +12,7 @@ game_logger()
 def run_game():
     game = HangmanGame(python_words)  # Sukuria žaidimo objektą su atsitiktiniu Python žodžiu ir pradiniu gyvybių skaičiumi.
     warned_once = False  # Redflag, kuris leidžia parodyti įspėjimą dėl neteisingos įvesties tik vieną kartą.
-    logging.info(f"🎮 New game started. Word length: {game.word}")
+    logging.info(f"New game started. Word length: {len(game.word)}")
 
     print("🎯 Welcome to Python Hangman!")
     print(game.display_word_progress())  # Pradinio žodžio progresas (raidės vs _)
@@ -29,8 +29,11 @@ def run_game():
 
 # Tikrina, ar įvestis sudaryta iš raidžių – kitaip parodo įspėjimą arba atima gyvybę.
         if not guess.isalpha():
-            logging.warning(f"⚠️ Invalid input: '{guess}' | Lives before penalty: {game.lives}")
-            print("⚠️ Only letters allowed!" if not warned_once else "❌ Invalid input → -1 life penalty.")
+            logging.warning(f"Invalid input: '{guess}' | Lives before penalty: {game.lives}")
+            if not warned_once:
+                print("⚠️ Only letters allowed!")
+            else:
+                print("❌ Invalid input → -1 life penalty.")
             if warned_once:
                 game.lives -= 1  # Antras bandymas spėti ne raidę -1 hp
                 logging.info(f"Penalty applied. Lives now: {game.lives}")
@@ -57,7 +60,7 @@ def run_game():
         logging.info(f"Lives left: {game.lives} | Word progress: {game.display_word_progress()}")
 
     result = "WON" if game.is_game_won else "LOST"
-    logging.info(f"🏁 Game ended. Result: {result} | Word was: {game.word}")
+    logging.info(f"Game ended. Result: {result} | Word was: {game.word}")
     display_result(game.is_game_won)
     print(f"The word was: {game.word}")
 
