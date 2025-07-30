@@ -1,7 +1,6 @@
 import logging
 from datetime import datetime
-
-DEBUG_MODE = False  # for debuging change to True (then you'll see logs in terminal) default must be False
+from parameters import DEBUG_MODE
 
 def game_logger():
     log_filename = generate_session_filename() # kiekvienai sesijai atskirai
