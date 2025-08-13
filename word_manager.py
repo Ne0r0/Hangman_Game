@@ -2,7 +2,7 @@ import random
 
 class WordManager:
     '''
-    Manages the terget word and its progress during the game.
+    Manages the target word and its progress during the game.
     '''
     def __init__(self, word_list: list[str]) -> None:
         chosen_word = random.choice(word_list)
