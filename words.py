@@ -1,4 +1,5 @@
-python_words = [
+# List of Python-related words used in the Hangman game
+python_words: list[str] = [
     "TUPLE", "CLASS", "FLOAT", "INPUT", "PRINT",
     "WHILE", "BREAK", "ASYNC", "AWAIT", "SUPER",
     "GLOBAL", "LAMBDA", "IMPORT", "RETURN", "OBJECT",
@@ -9,6 +10,6 @@ python_words = [
     "INDENT", "KWARGS", "ARGS", "YIELD", "DEFINE",
     "UPDATE", "VALUES", "ITEMS", "LENGTH", "OUTPUT",
     "ERRORS", "BINARY", "BRANCH", "COMMIT", "BOOLEAN",
-    "DECORATOR", "GENERATOR", "CONTEXT", "EXCEPTION",
-    "INSTANCE", "ENCAPSULATE", "POLYMORPHISM", "ITERATOR", "DATACLASS", "FSTRING"
+    "DECORATOR", "GENERATOR", "CONTEXT", "EXCEPTION", "INSTANCE",
+    "ENCAPSULATE", "POLYMORPHISM", "ITERATOR", "DATACLASS", "FSTRING"
 ]
