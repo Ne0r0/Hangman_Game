@@ -1,51 +1,51 @@
-import random
+from word_manager import WordManager
+from player import Player
 from parameters import DEFAULT_LIVES
 
-# Paleidžia žaidimą: pasirenka žodį, nustato gyvybes, išvalo spėjimus.
 class HangmanGame:
-    def __init__(self, word_list, lives=DEFAULT_LIVES):
-        self.word = random.choice(word_list).upper()
-        self.guessed_letters = set()  # Spėjimų istorija pradedama nuo nulio (unikalio reikšmės)
-        self.lives = lives
+    '''
+    Coordinates the Hangman game logic, including word management and player actions.
+    '''
+    def __init__(self, word_list: list[str], lives: int=DEFAULT_LIVES):
+        self.word_manager = WordManager(word_list)
+        self.player = Player(lives)
 
-# Tikrina, ar žaidėjas atspėjo visas raides — tuomet žaidimas laimėtas.
-    @property
-    def is_game_won(self) -> bool:
-        for letter in self.word:
-            if letter.upper() not in self.guessed_letters:
-                return False
-        return True
 
-# Tikrina, ar gyvybės pasibaigusios — žaidimas pralaimėtas.
-    @property
-    def is_game_over(self):
-        return self.lives <= 0
-
-# Apdoroja raidės spėjimą: įtraukia į spėtas ir sumažina gyvybę, jei raidė neteisinga.
-    def guess_letter(self, letter: str):
-        letter = letter.upper()
-        self.guessed_letters.add(letter)
-        if letter not in self.word:
+    def guess_letter(self, letter: str) -> None:
+        '''
+        Processes a single letter guess and applies damage if incorect.
+        '''
+        self.player.guess_letter(letter)
+        if not self.word_manager.contains_letter(letter):
             print("❌ Wrong letter!")
-            self.lives -= 1
+            self.player.take_damage()
 
-# Leidžia spėti visą žodį. Jei atspėtas — laimima, jei ne — gyvybės bauda.
-    def guess_word(self, guess: str):
-        guess = guess.upper()
-        if guess == self.word:
-            self.guessed_letters.update(self.word)
-        else:
+
+    def guess_word(self, word: str) -> None:
+        '''
+        Processes a full word guess. If incorrect, halves the player's lives.
+        '''
+        success = self.player.guess_word(word, self.word_manager.word)
+        if not success:
             print("❌ Wrong word! You lose half your lives.")
-            self.lives = max(0, self.lives // 2)
 
-# Grąžina žodį su atskleistomis raidėmis ir _, pvz. _ A _ _ E _.
+
+    def is_victory(self) -> bool:
+        '''
+        Checks if the player has guessed all letters correctly.
+        '''
+        return self.word_manager.is_complete(self.player.guessed_letters)
+
+
+    def is_defeat(self) -> bool:
+        '''
+        Checks if the player has run out of lives.
+        '''
+        return not self.player.has_lives()
+
+
     def display_word_progress(self) -> str:
-        progress = []
-
-        for letter in self.word:
-            if letter.upper() in self.guessed_letters:
-                progress.append(letter)
-            else:
-                progress.append('_')
-
-        return ' '.join(progress)
+        '''
+        Returns the current word progress with guessed letters and underscores.
+        '''
+        return self.word_manager.display_word_progress(self.player.guessed_letters)
